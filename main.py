@@ -41,7 +41,7 @@ class ConversionThread(QThread):
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("WDF File Converter")
+        self.setWindowTitle("WDF文件转换器")
         self.setGeometry(100, 100, 800, 600)
         
         # 初始化UI组件
@@ -107,14 +107,14 @@ class MainWindow(QMainWindow):
 
     def select_input_dir(self):
         """处理输入目录选择"""
-        dir_path = QFileDialog.getExistingDirectory(self, "Select Input Directory")
+        dir_path = QFileDialog.getExistingDirectory(self, "选择输入目录")
         if dir_path:
             self.input_edit.setText(dir_path)
             self.save_preferences()
 
     def select_output_dir(self):
         """处理输出目录选择"""
-        dir_path = QFileDialog.getExistingDirectory(self, "Select Output Directory")
+        dir_path = QFileDialog.getExistingDirectory(self, "选择输出目录")
         if dir_path:
             self.output_edit.setText(dir_path)
             self.save_preferences()
@@ -128,13 +128,13 @@ class MainWindow(QMainWindow):
         output_dir = self.output_edit.text()
         
         if not os.path.isdir(input_dir):
-            self.log_view.append("Error: Invalid input directory")
+            self.log_view.append("错误：无效的输入目录")
             return
         
         try:
             os.makedirs(output_dir, exist_ok=True)
         except Exception as e:
-            self.log_view.append(f"Error: {str(e)}")
+            self.log_view.append(f"错误：{str(e)}")
             return
         
         # 初始化进度条
@@ -152,23 +152,23 @@ class MainWindow(QMainWindow):
         """更新进度显示"""
         self.progress_bar.setMaximum(total)
         self.progress_bar.setValue(current)
-        self.log_view.append(f"Processing: {filename} ({current}/{total})")
+        self.log_view.append(f"正在处理：{filename} ({current}/{total})")
 
     def handle_error(self, filename, error):
         """处理转换错误"""
-        error_msg = f"Error in {filename}: {error}" if filename else error
-        self.log_view.append(f"❌ {error_msg}")
+        error_msg = f"{filename} 发生错误：" if filename else ""
+        self.log_view.append(f"❌ {error_msg}{error}")
 
     def on_conversion_finished(self):
         """转换完成处理"""
-        self.log_view.append("Conversion completed!")
+        self.log_view.append("转换完成！")
         self.progress_bar.setValue(0)
 
     def cancel_conversion(self):
         """取消转换操作"""
         if self.conversion_thread and self.conversion_thread.isRunning():
             self.conversion_thread.stop()
-            self.log_view.append("Conversion cancelled by user")
+            self.log_view.append("用户已取消转换")
 
     def load_preferences(self):
         """加载用户偏好设置"""
