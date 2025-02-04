@@ -1,0 +1,3 @@
+PyQt6==6.4.2
+renishawWiRE==0.1.8
+pyinstaller==5.13.0  # 打包工具
