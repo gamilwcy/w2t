@@ -54,18 +54,18 @@ class MainWindow(QMainWindow):
 
     def create_widgets(self):
         # 创建所有UI组件
-        self.input_label = QLabel("Input Directory:")
+        self.input_label = QLabel("输入目录：")
         self.input_edit = QLineEdit()
-        self.input_btn = QPushButton("Browse...")
+        self.input_btn = QPushButton("浏览...")
         
-        self.output_label = QLabel("Output Directory:")
+        self.output_label = QLabel("输出目录：")
         self.output_edit = QLineEdit()
-        self.output_btn = QPushButton("Browse...")
+        self.output_btn = QPushButton("浏览...")
         
         self.progress_bar = QProgressBar()
         self.log_view = QTextEdit()
-        self.start_btn = QPushButton("Start Conversion")
-        self.cancel_btn = QPushButton("Cancel")
+        self.start_btn = QPushButton("开始转换")
+        self.cancel_btn = QPushButton("取消")
 
     def setup_layout(self):
         # 设置布局管理器
