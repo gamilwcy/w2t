@@ -28,9 +28,9 @@ jobs:
 
     - name: Build EXE
       run: |
-        pyinstaller --windowed --onefile ^
-          --name WDFConverter ^
-          --icon=app.ico ^
+        pyinstaller --windowed --onefile `
+          --name WDFConverter `
+          --icon=app.ico `
           main.py
 
     - name: Upload artifact
