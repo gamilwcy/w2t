@@ -1,0 +1,47 @@
+name: Build Windows EXE
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.8"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Build EXE
+      run: |
+        pyinstaller --windowed --onefile \
+          --name WDFConverter \
+          --icon=app.ico \
+          main.py
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ReleasePackage
+        path: |
+          dist/WDFConverter.exe
+          README.md
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: |
+          dist/WDFConverter.exe
+          README.md
