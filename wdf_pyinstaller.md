@@ -78,6 +78,7 @@ pyinstaller --windowed --onefile \
   --name WDFConverter \
   --icon=app.ico \
   --add-data "app.ico;." \
+  --hidden-import PyQt6.sip \
   main.py
 ```
 
