@@ -64,6 +64,7 @@ class MainWindow(QMainWindow):
         
         self.progress_bar = QProgressBar()
         self.log_view = QTextEdit()
+        self.log_view.setReadOnly(True)  # 添加只读属性
         self.start_btn = QPushButton("开始转换")
         self.cancel_btn = QPushButton("取消")
 
